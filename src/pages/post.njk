@@ -1,0 +1,41 @@
+---
+pagination:
+  data: posts
+  size: 1
+  alias: post
+  addAllPagesToCollections: true
+tags: posts
+eleventyComputed:
+  pageTitle: "{{ post.title }}"
+template: post
+permalink: "blog/{{ post.slug.current | slug }}/index.html"
+---
+
+{% set nextPost = collections.posts | getNextCollectionItem(page) %}
+{% set firstPost = collections.posts[0] %}
+
+{% set currentProject = work.projects | find(project.title) %}
+{% set nextProject = '/work/' + work.projects[currentProject + 1].slug.current %}
+{% set firstProject = '/work/' + work.projects[0].slug.current %}
+
+{% if currentProject === work.projects.length - 1 %}
+  {% set nextProject = firstProject %}
+{% endif %}
+
+
+<article>
+  <header>
+    <h1>{{ post.title }}</h1>
+  </header>
+
+  <section></section>
+  <section></section>
+  <section></section>
+
+  <article>
+    <h2></h2>
+    <p></p>
+  </article>
+
+  <footer>Post Footer</footer>
+</article>
